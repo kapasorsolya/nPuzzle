@@ -11,8 +11,9 @@ package npuzzle;
  */
 public class NPuzzle
 {
-    final static private String INITIAL_STATE = "123804765";
-    final static private String GOAL_STATE = "123845760";
+    //final static private String INITIAL_STATE = "123046758";
+    final static private String INITIAL_STATE = "724506831";
+    final static private String GOAL_STATE = "012345678";
 
     /**
      * @param args the command line arguments
@@ -20,18 +21,11 @@ public class NPuzzle
     public static void main(String[] args) {
         // TODO code application logic here
        String rootState = INITIAL_STATE;
-       long startTime = System.currentTimeMillis();
-
+       int n=3;
         SearchTree search = new SearchTree(new Node(rootState), GOAL_STATE);
         
-        search.aStar(Heuristic.H_TWO);
-       // search.bestFirstSearch();
-        
-
-        long finishTime = System.currentTimeMillis();
-        long totalTime = finishTime - startTime;
-        System.out.println("Time  :" + totalTime);
-        System.err.println(rootState);
+        search.aStar(Heuristic.H_TWO,n*n+1);
+     
     }
     
 }
