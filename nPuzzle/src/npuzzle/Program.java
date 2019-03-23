@@ -25,8 +25,8 @@ public class Program {
     private static boolean READ_FROM_FILE = true;
     private static boolean PRINT_STDOUT_SOLUTION = false;
     private static boolean PRINT_COST = false;
-    private static boolean PRINT_NUMBER_OF_VISITED_NODE = false;
-
+    private static boolean PRINT_NUMBER_OF_VISITED_NODE = true;
+    private static int  HEURISTIC =2;
 
 
 	
@@ -62,6 +62,26 @@ public class Program {
                 if (args[i].equals("-nvisited")) {
                     PRINT_NUMBER_OF_VISITED_NODE = true;
                 }
+                
+                if (args[i].equals("-h")) {
+                    if (i == args.length - 1) {
+                        System.out.println("You must give the heuristic type (1 - number of wrong pieces" + "OR" + " 2 - Manhattan");
+                        System.exit(1);
+                    }
+                    if (i != args.length - 1) {
+                        HEURISTIC = Integer.parseInt(args[i+1]);
+						//System.out.print("heuristic:" + HEURISTIC);
+                        if(HEURISTIC!= 1 && HEURISTIC!=2)
+                        {
+                            System.out.println("We didn't recognize the heuristic type");
+                            System.exit(0);
+                        }
+                        //System.out.print("heuristic:" + args[i + 1]);
+                        
+
+                    }
+                }
+                
             }
         }
         StringBuilder s = new StringBuilder("");
@@ -102,7 +122,12 @@ public class Program {
        
         SearchTree search = new SearchTree(new Node(rootState), GOAL_STATE);
         
-        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST,PRINT_NUMBER_OF_VISITED_NODE);
+		if(HEURISTIC==1){
+			search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST,PRINT_NUMBER_OF_VISITED_NODE);
+		}
+		else{
+			search.aStar(Heuristic.H_TWO,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST,PRINT_NUMBER_OF_VISITED_NODE);
+		}
     }
 
     private static String readInitialStateFromFile(String fileName) throws FileNotFoundException, IOException{ {
