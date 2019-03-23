@@ -119,11 +119,10 @@ public class SearchTree {
         int difference = 0;
         int n = 3;
         int[][] items = ConvertToArray(goalState);
-         //TO DO 
-         //itt a heurisztikanal lehet eltevesztettem a dolgokat currentState kellene
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                difference += getManhattanDistance(items[i][j], i, j, items);
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                difference += getManhattanDistance(currentState[i][j], i, j, items);
             }
 
         }
