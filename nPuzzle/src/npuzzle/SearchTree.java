@@ -39,11 +39,11 @@ import java.util.Set;
     }
     
     /**
-     * Find the goal using A* algorithm. The huristic is the real cost to the current node from the initial Node
+     * Find the goal using A* algorithm. The heuristic is the real cost to the current node from the initial Node
      * plus the estimated cost from the current node to the goal node
      */
     //*************************************************************************************************
-    public void aStar(Heuristic heuristic,int size) {
+    public void aStar(Heuristic heuristic,int size,boolean  PRINT_SOLUTION) {
         // stateSet is a set that contains node that are already visited
         Set<String> stateSets = new HashSet<String>();
         int totalCost = 0;
@@ -92,7 +92,9 @@ import java.util.Set;
             System.exit(0);
         }
         }
+        if(PRINT_SOLUTION==true){
         NodeUtil.printSolution(currentNode, stateSets, root, time);
+        }
     }
 
     //****************************************************************************************************

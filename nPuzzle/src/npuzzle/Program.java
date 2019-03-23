@@ -23,6 +23,8 @@ public class Program {
     private static String INITIAL_STATE="";//= "724506831";
     final static private String GOAL_STATE = "012345678";
     private static boolean READ_FROM_FILE = false;
+    private static boolean PRINT_STDOUT_SOLUTION = false;
+
 	
     /**
      * @param args the command line arguments
@@ -46,6 +48,9 @@ public class Program {
                         READ_FROM_FILE = true;
 
                     }
+                }
+                if (args[i].equals("-solseq")) {
+                    PRINT_STDOUT_SOLUTION = true;
                 }
             }
         }
@@ -73,7 +78,7 @@ public class Program {
                  s.append(scan.nextInt());
                  //System.out.println();
             }
-            System.out.println(s);
+           // System.out.println(s);
            
         }
         for(int i=0;i<s.length();i++)
@@ -86,7 +91,7 @@ public class Program {
        
         SearchTree search = new SearchTree(new Node(rootState), GOAL_STATE);
         
-        search.aStar(Heuristic.H_ONE,n*n+1);
+        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION);
     }
 
     private static String readInitialStateFromFile(String fileName) throws FileNotFoundException, IOException{ {
