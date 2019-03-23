@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
-
-
 /**
  *
  * @author Orsolya
  */
-
 public class NodeUtil {
+
     public static List<String> getSuccessors(String state) {
         List<String> successors = new ArrayList<String>();
 
@@ -74,12 +72,11 @@ public class NodeUtil {
 
         return successors;
 
-
     }
 
+    public static void printSolution(Node goalNode, Set<String> visitedNodes, Node root, int time, boolean PRINT_SOLUTION, boolean PRINT_COST) {
 
-    public static void printSolution(Node goalNode, Set<String> visitedNodes, Node root, int time) {
-
+        
         int totalCost = 0;
 
         Stack<Node> solutionStack = new Stack<Node>();
@@ -97,18 +94,24 @@ public class NodeUtil {
                 cost = Character.getNumericValue(destinationState.charAt(sourceState.indexOf('0')));
                 totalCost += cost;
             }
-
+            
             sourceState = destinationState;
+            if(PRINT_SOLUTION == true){
             System.out.println("*******");
-            System.out.println( solutionStack.get(i).getState().substring(0, 3));
-            System.out.println( solutionStack.get(i).getState().substring(3, 6));
+            System.out.println(solutionStack.get(i).getState().substring(0, 3));
+            System.out.println(solutionStack.get(i).getState().substring(3, 6));
             System.out.println(solutionStack.get(i).getState().substring(6, 9));
-            System.out.println("*******");
+            System.out.println("*******" + "\n");
+            
+            }
 
         }
-        System.out.println();
-        System.out.println("** Cost:  " + (solutionStack.size() - 1));
-        System.out.println();
+        if (PRINT_COST == true) {
+
+            System.out.println();
+            System.out.println("** Cost:  " + (solutionStack.size() - 1));
+            System.out.println();
+        }
 
     }
 

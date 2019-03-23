@@ -13,7 +13,8 @@ import java.util.Set;
  *
  * @author Orsolya
  */
- public class SearchTree {
+public class SearchTree {
+
     private Node root;
     private String goalSate;
 
@@ -37,13 +38,14 @@ import java.util.Set;
         this.root = root;
         this.goalSate = goalSate;
     }
-    
+
     /**
-     * Find the goal using A* algorithm. The heuristic is the real cost to the current node from the initial Node
-     * plus the estimated cost from the current node to the goal node
+     * Find the goal using A* algorithm. The heuristic is the real cost to the
+     * current node from the initial Node plus the estimated cost from the
+     * current node to the goal node
      */
     //*************************************************************************************************
-    public void aStar(Heuristic heuristic,int size,boolean  PRINT_SOLUTION) {
+    public void aStar(Heuristic heuristic, int size, boolean PRINT_SOLUTION,boolean PRINT_COST) {
         // stateSet is a set that contains node that are already visited
         Set<String> stateSets = new HashSet<String>();
         int totalCost = 0;
@@ -61,49 +63,52 @@ import java.util.Set;
             stateSets.add(currentNode.getState());
             List<String> nodeSuccessors = NodeUtil.getSuccessors(currentNode.getState());
             for (String n : nodeSuccessors) {
-                if (stateSets.contains(n))
+                if (stateSets.contains(n)) {
                     continue;
+                }
                 stateSets.add(n);
                 Node child = new Node(n);
                 currentNode.addChild(child);
                 child.setParent(currentNode);
 
-                if (null != heuristic)
+                if (null != heuristic) {
                     switch (heuristic) {
-                    case H_ONE:
-                        child.setTotalCost(currentNode.getTotalCost() + Character.getNumericValue(child.getState().charAt(child.getParent().getState().indexOf('0'))), heuristicOne(child.getState(), goalSate));
-                       //System.out.println("TotalCost" + currentNode.getTotalCost() );
-                        
-                        break;
-                    case H_TWO:
-                        child.setTotalCost(currentNode.getTotalCost() + Character.getNumericValue(child.getState().charAt(child.getParent().getState().indexOf('0'))), heuristicTwo(ConvertToArray(child.getState()), goalSate));
-                        break;
-                    default:
-                        break;
+                        case H_ONE:
+                            child.setTotalCost(currentNode.getTotalCost() + Character.getNumericValue(child.getState().charAt(child.getParent().getState().indexOf('0'))), heuristicOne(child.getState(), goalSate));
+                            //System.out.println("TotalCost" + currentNode.getTotalCost() );
+
+                            break;
+                        case H_TWO:
+                            child.setTotalCost(currentNode.getTotalCost() + Character.getNumericValue(child.getState().charAt(child.getParent().getState().indexOf('0'))), heuristicTwo(ConvertToArray(child.getState()), goalSate));
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 nodePriorityQueue.add(child);
 
             }
             currentNode = nodePriorityQueue.poll();
             time += 1;
-                if(nodePriorityQueue.isEmpty())
-        {
-            System.out.println("There is NO Solution");
-            System.exit(0);
+            if (nodePriorityQueue.isEmpty()) {
+                System.out.println("There is NO Solution");
+                System.exit(0);
+            }
         }
-        }
-        if(PRINT_SOLUTION==true){
-        NodeUtil.printSolution(currentNode, stateSets, root, time);
-        }
+       
+        NodeUtil.printSolution(currentNode, stateSets, root, time,PRINT_SOLUTION,PRINT_COST);
+        
     }
 
     //****************************************************************************************************
     // This heuristic estimates the cost to the goal from current state by counting the number of misplaced tiles
     private int heuristicOne(String currentState, String goalSate) {
         int difference = 0;
-        for (int i = 0; i < currentState.length(); i ++)
-            if (currentState.charAt(i) != goalSate.charAt(i))
+        for (int i = 0; i < currentState.length(); i++) {
+            if (currentState.charAt(i) != goalSate.charAt(i)) {
                 difference++;
+            }
+        }
         return difference;
     }
 
@@ -114,48 +119,41 @@ import java.util.Set;
         int difference = 0;
         int n = 3;
         int[][] items = ConvertToArray(goalState);
-   
-        for (int i = 0; i < 3; i ++){
-            for(int j=0;j<3;j++)
-            {
-                difference += getManhattanDistance(items[i][j],i,j, items);
+         //TO DO 
+         //itt a heurisztikanal lehet eltevesztettem a dolgokat currentState kellene
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                difference += getManhattanDistance(items[i][j], i, j, items);
             }
-               
+
         }
         //System.out.println("npuzzle.SearchTree.heuristicTwo()" + " " + difference );
         return difference;
     }
 
-    private int getManhattanDistance(int item, int row, int column, int[][] goalState) 
-    {
-      //int res =0;
-        for(int i=0;i<3;i++)
-      {
-          for(int j=0;j<3;j++)
-          {
-              if(goalState[i][j]==item)
-              {
-                  return abs(i-row) + abs(j-column);
-              }
-          }
-      }
+    private int getManhattanDistance(int item, int row, int column, int[][] goalState) {
+        //int res =0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (goalState[i][j] == item) {
+                    return abs(i - row) + abs(j - column);
+                }
+            }
+        }
         return -1;
     }
 
-    private int[][]  ConvertToArray(String state) {
-        int [][] newItem = new int[3][3] ;
-        int counter =0;
-        for(int i=0;i<3;i++)
-        {
-            for(int j=0;j<3;j++)
-            {
+    private int[][] ConvertToArray(String state) {
+        int[][] newItem = new int[3][3];
+        int counter = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 newItem[i][j] = Character.getNumericValue(state.charAt(counter));
-                
+
             }
         }
-        
-        
-         return newItem;
-        
+
+        return newItem;
+
     }
- }
+}

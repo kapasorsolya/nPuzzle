@@ -24,6 +24,8 @@ public class Program {
     final static private String GOAL_STATE = "012345678";
     private static boolean READ_FROM_FILE = false;
     private static boolean PRINT_STDOUT_SOLUTION = false;
+    private static boolean PRINT_COST = false;
+
 
 	
     /**
@@ -52,6 +54,9 @@ public class Program {
                 if (args[i].equals("-solseq")) {
                     PRINT_STDOUT_SOLUTION = true;
                 }
+                if (args[i].equals("-pcost")) {
+                    PRINT_COST = true;
+                }
             }
         }
         StringBuilder s = new StringBuilder("");
@@ -72,6 +77,7 @@ public class Program {
             
             System.out.println("Please enter "+n*n+ " numbers");
             Scanner scan = new Scanner(System.in);
+            
             for(int i=0;i<9;i++)
             {
                  System.out.print(" item("+i+ ") = ");
@@ -91,7 +97,7 @@ public class Program {
        
         SearchTree search = new SearchTree(new Node(rootState), GOAL_STATE);
         
-        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION);
+        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST);
     }
 
     private static String readInitialStateFromFile(String fileName) throws FileNotFoundException, IOException{ {
