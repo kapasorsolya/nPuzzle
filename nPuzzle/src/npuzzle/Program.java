@@ -22,9 +22,11 @@ public class Program {
 
     private static String INITIAL_STATE="";//= "724506831";
     final static private String GOAL_STATE = "012345678";
-    private static boolean READ_FROM_FILE = false;
+    private static boolean READ_FROM_FILE = true;
     private static boolean PRINT_STDOUT_SOLUTION = false;
     private static boolean PRINT_COST = false;
+    private static boolean PRINT_NUMBER_OF_VISITED_NODE = false;
+
 
 
 	
@@ -56,6 +58,9 @@ public class Program {
                 }
                 if (args[i].equals("-pcost")) {
                     PRINT_COST = true;
+                }
+                if (args[i].equals("-nvisited")) {
+                    PRINT_NUMBER_OF_VISITED_NODE = true;
                 }
             }
         }
@@ -97,7 +102,7 @@ public class Program {
        
         SearchTree search = new SearchTree(new Node(rootState), GOAL_STATE);
         
-        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST);
+        search.aStar(Heuristic.H_ONE,n*n+1, PRINT_STDOUT_SOLUTION,PRINT_COST,PRINT_NUMBER_OF_VISITED_NODE);
     }
 
     private static String readInitialStateFromFile(String fileName) throws FileNotFoundException, IOException{ {

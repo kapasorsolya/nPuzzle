@@ -45,7 +45,7 @@ public class SearchTree {
      * current node to the goal node
      */
     //*************************************************************************************************
-    public void aStar(Heuristic heuristic, int size, boolean PRINT_SOLUTION,boolean PRINT_COST) {
+    public void aStar(Heuristic heuristic, int size, boolean PRINT_SOLUTION,boolean PRINT_COST,boolean NR_VISITED_NODE) {
         // stateSet is a set that contains node that are already visited
         Set<String> stateSets = new HashSet<String>();
         int totalCost = 0;
@@ -96,7 +96,7 @@ public class SearchTree {
             }
         }
        
-        NodeUtil.printSolution(currentNode, stateSets, root, time,PRINT_SOLUTION,PRINT_COST);
+        NodeUtil.printSolution(currentNode, stateSets, root, time,PRINT_SOLUTION,PRINT_COST,NR_VISITED_NODE);
         
     }
 

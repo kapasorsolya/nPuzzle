@@ -74,7 +74,7 @@ public class NodeUtil {
 
     }
 
-    public static void printSolution(Node goalNode, Set<String> visitedNodes, Node root, int time, boolean PRINT_SOLUTION, boolean PRINT_COST) {
+    public static void printSolution(Node goalNode, Set<String> visitedNodes, Node root, int time, boolean PRINT_SOLUTION, boolean PRINT_COST,boolean NR_VISITED_NODE) {
 
         
         int totalCost = 0;
@@ -109,8 +109,12 @@ public class NodeUtil {
         if (PRINT_COST == true) {
 
             System.out.println();
-            System.out.println("** Cost:  " + (solutionStack.size() - 1));
+            System.out.println(" Total Cost:  " + (solutionStack.size() - 1));
             System.out.println();
+        }
+        
+        if(NR_VISITED_NODE ==true){
+            System.out.println(" Number of visited Node:  " + (visitedNodes.size()));
         }
 
     }
