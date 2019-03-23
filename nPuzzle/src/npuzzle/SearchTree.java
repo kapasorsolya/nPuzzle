@@ -86,6 +86,11 @@ import java.util.Set;
             }
             currentNode = nodePriorityQueue.poll();
             time += 1;
+                if(nodePriorityQueue.isEmpty())
+        {
+            System.out.println("There is NO Solution");
+            System.exit(0);
+        }
         }
         NodeUtil.printSolution(currentNode, stateSets, root, time);
     }
@@ -115,7 +120,7 @@ import java.util.Set;
             }
                
         }
-        System.out.println("npuzzle.SearchTree.heuristicTwo()" + " " + difference );
+        //System.out.println("npuzzle.SearchTree.heuristicTwo()" + " " + difference );
         return difference;
     }
 
