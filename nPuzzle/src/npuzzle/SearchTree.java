@@ -122,7 +122,7 @@ public class SearchTree {
         
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                difference += getManhattanDistance(currentState[i][j], i, j, items);
+                difference += getManhattanDistance(items[i][j], i, j, items);
             }
 
         }
