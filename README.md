@@ -16,9 +16,37 @@
     - kapcsoló nélkül: 
       - 1.) lépés (ugyanaz mint az előbbiekben)
       - 2.) lépés: java Program ---> ebben az esetben a standard bemenetről olvassunk(alapméretezetten 9 állapotot(3*3 puzzle))
-            
-    
-    2.) 
-    
-    
+
 ## Eredmények:
+    
+   -bemenet:        7  2  4           -kimenet: 0  1  2
+                    5  0  6                     3  4  5
+                    8  3  1                     6  7  8
+    
+   2 - solseq: a standard kimenetre írja a teljes megoldási szekvenciát.
+   
+   Eredmények:
+   
+   -bemenet:    1  4  2      -I lépés:  1  4  2
+                0  3  5                 3  0  5
+                6  7  8                 6  7  8
+           
+   - II lépés :  1  0  2      - III lépés(végeredmény): 0  1  2
+                 3  4  5                                3  4  5
+                 6  7  8                                6  7  8
+    
+
+   3 - –pcost: a standard kimenetre írja a megoldás költségét 
+   
+   Eredmények:
+   
+   -bemenet: 7  2  4        -kimenet: 0  1  2
+             5  0  6                  3  4  5
+             8  3  1                  6  7  8
+             
+    - megoldás költsége: 45832
+    
+    
+   4 - –nvisited: a standard kimenetre írja a meglátogatott csomópontok számát
+    
+
