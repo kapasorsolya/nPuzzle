@@ -64,4 +64,11 @@
    - a heurisztikák, a kapcsolókkal való együttes használata során íródnak ki a meglátogatott csomópontok száma, a költség;
    - ha H különbőzik 1-től vagy 2-től, akkor hiba üzenet íródik ki,hogy nincs ilyen heursiztika;
   
-## 6 - –rand <N> <M> egy véletlenszerű, N méretű állapotot írjon ki a standard kimenetre. M a véletlenszerű tologatások számát jelenti.
+## 6  –rand <N> <M> egy véletlenszerű, N méretű állapotot írjon ki a standard kimenetre. M a véletlenszerű tologatások számát jelenti.
+  
+   - ha M=3 és N=4, a bemenet : 7  2  4  5  0  6  8  3  1
+        - random eltolási irányok:
+                   - eltolás jobbra : 7  2  4  5  6  0  8  3  1
+                   - eltolás fel: 7  2  0  5  6  4  8  3  1
+                   - eltolás le: 7  2  4  5  6  0  8  3  1
+                   -eltolás le: 7  2  4  5  6  1  8  3  0
